@@ -1,0 +1,28 @@
+/* ════════════════════════════════════════
+   WhyUs.css
+   Import in: src/components/WhyUs.jsx
+   ════════════════════════════════════════ */
+
+.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+.why-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px;
+  display: flex; gap: 20px; align-items: flex-start; transition: all 0.3s;
+}
+.why-card:hover { border-color: rgba(56,189,248,0.3); }
+body.light .why-card { background: #ffffff; border-color: rgba(26,79,216,0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+.why-icon {
+  font-size: 2rem; flex-shrink: 0; width: 52px; height: 52px;
+  background: rgba(26,79,216,0.15); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+body.light .why-icon { background: rgba(26,79,216,0.08); }
+
+.why-card h4 { font-family: 'Sora', sans-serif; font-weight: 700; margin-bottom: 6px; }
+.why-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+body.light .why-card p { color: #475569; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }

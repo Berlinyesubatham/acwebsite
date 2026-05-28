@@ -1,0 +1,324 @@
+/* ════════════════════════════════════════
+   HERO SECTION
+   ════════════════════════════════════════ */
+
+.hero {
+  min-height: 100vh;
+  padding: 120px 5% 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  gap: 40px;
+  background: #000;
+  color: #fff;
+}
+
+/* Background Image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+
+  filter: brightness(0.8) contrast(1.1);
+}
+
+/* Overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* background: rgba(0,0,0,0.42); */
+  z-index: 2;
+}
+
+/* Grid */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+}
+
+/* Content */
+.hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 720px;
+
+  background: rgba(0,0,0,0.12);
+  backdrop-filter: blur(4px);
+  
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-block;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+
+  border-radius: 30px;
+
+  background: rgba(255,255,255,0.1);
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  backdrop-filter: blur(10px);
+}
+
+/* Heading */
+.hero-content h1 {
+   font-size: 56px;   /* 78px → 56px (big fix) */
+  line-height: 1.15;
+  font-weight: 800;
+  margin-bottom: 20px;
+
+  color: #ffffff;
+
+
+  text-shadow:
+    0 2px 10px rgba(0,0,0,0.8),
+    0 4px px rgba(81, 170, 221, 0.7);
+}
+
+/* Blue Highlight */
+.hero-content h1 span {
+  color: #0564c2;
+}
+
+/* Paragraph */
+.hero-content p {
+  font-size: 20px;
+  line-height: 1.8;
+
+  color: hsl(0, 0%, 100%);
+
+  margin-bottom: 35px;
+
+  max-width: 650px;
+  text-shadow:
+    0 1px 6px rgba(0,0,0,0.8);
+}
+
+/* Buttons */
+.hero-actions {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Primary Button */
+.btn-primary {
+  padding: 14px 28px;
+
+  border-radius: 12px;
+
+  background: #1e90ff;
+  color: #fff;
+
+  text-decoration: none;
+  font-weight: 700;
+
+  transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+}
+
+/* Outline Button */
+.btn-outline {
+  padding: 14px 28px;
+
+  border-radius: 12px;
+
+  border: 2px solid #fff;
+
+  color: #fff;
+
+  text-decoration: none;
+  font-weight: 700;
+
+  transition: 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Quote */
+.hero-quote{
+  position: relative;
+  z-index: 5;
+
+  max-width: 320px;
+
+  font-size: 22px;
+  line-height: 1.7;
+
+  font-style: italic;
+
+  color: white;
+
+ 
+  
+}
+
+/* Animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+
+@media (max-width: 992px) {
+
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    padding-top: 140px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 52px;
+  }
+
+  .hero-content p {
+    margin: auto auto 30px;
+    font-size: 17px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-quote {
+    max-width: 100%;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .hero-content h1 {
+    font-size: 38px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* ── LIGHT MODE HERO FIX ── */
+/* Bright mode la hero change aaga koodathu */
+
+/* hero same dark style maintain */
+body.light .hero {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* overlay same */
+body.light .hero-overlay {
+  background: rgba(0,0,0,0.42) !important;
+}
+
+/* grid same */
+body.light .hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px) !important;
+}
+
+/* content box same */
+body.light .hero-content {
+  background: rgba(0,0,0,0.12) !important;
+  color: #fff !important;
+}
+
+/* heading */
+body.light .hero-content h1 {
+  color: #fff !important;
+}
+
+/* paragraph */
+body.light .hero-content p {
+  color: #fff !important;
+}
+
+/* badge */
+body.light .hero-badge {
+  background: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  color: #fff !important;
+}
+
+/* quote */
+body.light .hero-quote {
+  color: #fff !important;
+}
+
+/* outline button */
+body.light .btn-outline {
+  border: 2px solid #fff !important;
+  color: #fff !important;
+}
+
+body.light .btn-outline:hover {
+  background: #fff !important;
+  color: #000 !important;
+}

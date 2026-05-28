@@ -1,0 +1,41 @@
+/* ════════════════════════════════════════
+   StatsBar.css
+   Import in: src/components/StatsBar.jsx
+   ════════════════════════════════════════ */
+
+.stats-bar {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 5%;
+}
+body.light .stats-bar { background: #e8f0fe; border-color: rgba(26,79,216,0.12); }
+
+.stats-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-item { text-align: center; padding: 10px 20px; border-right: 1px solid var(--border); }
+.stat-item:last-child { border-right: none; }
+body.light .stat-item { border-color: rgba(26,79,216,0.12); }
+
+.stat-num {
+  font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 800;
+  background: linear-gradient(90deg, var(--sky), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+body.light .stat-label { color: #475569; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+  .stat-item:nth-child(4) { border-top: 1px solid var(--border); }
+}
+@media (max-width: 480px) {
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+}

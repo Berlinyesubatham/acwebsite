@@ -1,0 +1,63 @@
+/* ════════════════════════════════════════
+   About.css
+   Import in: src/components/About.jsx
+   ════════════════════════════════════════ */
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-img-wrap { position: relative; }
+.about-img{
+    width: 100%;
+    max-width: 400px;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 3px solid rgba(255,255,255,0.1);
+}
+.about-img-wrap{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.about-badge {
+  position: absolute; bottom: -16px; right: -16px;
+  background: linear-gradient(135deg, var(--amber), #ef4444);
+  color: white; padding: 16px 22px; border-radius: 12px; text-align: center;
+  font-family: 'Sora', sans-serif; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(245,158,11,0.4);
+}
+.about-badge .num { font-size: 2rem; display: block; }
+
+.about-text h2 { font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; }
+.about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+body.light .about-text p { color: #475569; }
+
+.feature-list { list-style: none; margin: 24px 0; }
+.feature-list li {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--muted); margin-bottom: 12px; font-size: 0.95rem;
+}
+.feature-list li::before {
+  content: '✓'; width: 22px; height: 22px;
+  background: rgba(26,79,216,0.2); border: 1px solid var(--blue);
+  color: var(--sky); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+body.light .feature-list li { color: #475569; }
+body.light .feature-list li::before { background: rgba(26,79,216,0.1); }
+
+body.light .about-text h2 { 
+  color: #d4d8df;                /* ← இதுவும் add பண்ணுங்க */
+}
+
+body.light .about-text h2 { color: #0f172a; }
+body.dark  .about-text h2 { color: #f1f5f9; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-img-wrap { max-width: 500px; }
+}

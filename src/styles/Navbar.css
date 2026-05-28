@@ -1,0 +1,95 @@
+/* ════════════════════════════════════════
+   Navbar.css  —  Navbar + Hamburger + Mobile Menu + Theme Toggle
+   Import in: src/components/Navbar.jsx
+   ════════════════════════════════════════ */
+
+/* ── NAVBAR ── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 5%;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px; transition: all 0.3s;
+}
+.navbar.scrolled { background: rgba(10,22,40,0.98); }
+body.light .navbar { background: rgba(240,246,255,0.92) !important; border-bottom: 1px solid rgba(26,79,216,0.12); }
+body.light .navbar.scrolled { background: rgba(240,246,255,0.99) !important; }
+
+/* ── BRAND ── */
+.brand {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.25rem;
+  color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px;
+}
+body.light .brand { color: #0f172a; }
+/* புதுசு - logo image-க்காக */
+.brand-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;   /* logo proportions கெடாம இருக்கும் */
+  
+  background: transparent;
+  border-radius: 100%;
+}
+
+/* ── DESKTOP NAV LINKS ── */
+.nav-links { display: flex; gap: 6px; align-items: center; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; padding: 8px 14px;
+  border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+body.light .nav-links a { color: #475569; }
+body.light .nav-links a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--blue), var(--sky)) !important;
+  color: var(--white) !important; padding: 9px 20px !important; border-radius: 8px !important;
+}
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 6px;
+}
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE MENU ── */
+.mobile-menu {
+  display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 999;
+  background: rgba(10,22,40,0.98); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 5% 24px; flex-direction: column; gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--muted); text-decoration: none; padding: 12px 16px;
+  border-radius: 8px; font-size: 1rem; font-weight: 500; transition: all 0.2s;
+}
+.mobile-menu a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+body.light .mobile-menu { background: rgba(240,246,255,0.99); border-bottom: 1px solid rgba(26,79,216,0.12); }
+body.light .mobile-menu a { color: #475569; }
+body.light .mobile-menu a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
+.mobile-menu .m-cta {
+  margin-top: 8px; background: linear-gradient(135deg, var(--blue), var(--sky));
+  color: var(--white) !important; text-align: center; padding: 14px !important; border-radius: 10px !important;
+}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  display: flex; align-items: center; background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 100px;
+  padding: 4px; cursor: pointer; gap: 2px; transition: all 0.3s; flex-shrink: 0;
+}
+body.light .theme-toggle { background: rgba(26,79,216,0.08); border-color: rgba(26,79,216,0.2); }
+.theme-toggle-icon {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; transition: all 0.3s; color: var(--muted);
+}
+.theme-toggle-icon.active { background: linear-gradient(135deg, var(--blue), var(--sky)); color: #fff; }
+
+/* ── RESPONSIVE ── */

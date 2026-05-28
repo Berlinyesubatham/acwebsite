@@ -1,0 +1,36 @@
+/* ════════════════════════════════════════
+   Process.css
+   Import in: src/components/Process.jsx
+   ════════════════════════════════════════ */
+
+.process-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 30px; margin-top: 16px; position: relative;
+}
+/* horizontal connector line */
+.process-steps::before {
+  content: ''; position: absolute; top: 36px; left: 12%; right: 12%;
+  height: 2px; background: linear-gradient(90deg, var(--blue), var(--sky)); z-index: 0;
+}
+
+.step { text-align: center; position: relative; z-index: 1; }
+.step-num {
+  width: 72px; height: 72px; background: var(--card-bg); border: 2px solid var(--blue);
+  border-radius: 50%; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--sky); transition: all 0.3s;
+}
+.step:hover .step-num { background: var(--blue); color: var(--white); transform: scale(1.1); }
+body.light .step-num { background: #fff; border-color: var(--blue); }
+
+.step h4 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.step p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+body.light .step p { color: #475569; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .process-steps::before { display: none; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) { .process-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .process-steps { grid-template-columns: 1fr; } }

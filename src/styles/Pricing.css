@@ -1,0 +1,55 @@
+/* ════════════════════════════════════════
+   Pricing.css
+   Import in: src/components/Pricing.jsx
+   ════════════════════════════════════════ */
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.price-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 16px; padding: 36px 28px;
+  text-align: center; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.price-card.featured { border-color: var(--blue); box-shadow: 0 0 40px rgba(26,79,216,0.25); }
+.price-card:hover { transform: translateY(-4px); }
+body.light .price-card { background: #ffffff; border-color: rgba(26,79,216,0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+/* Corner ribbon */
+.featured-label {
+  position: absolute; top: 16px; right: -24px;
+  background: linear-gradient(90deg, var(--blue), var(--sky));
+  color: white; font-size: 0.7rem; font-weight: 700;
+  padding: 4px 32px; transform: rotate(35deg); letter-spacing: 0.05em;
+}
+
+.price-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+.price-card h3 { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+.price-from { color: var(--muted); font-size: 0.8rem; }
+.price-amount { font-family: 'Sora', sans-serif; font-size: 2.6rem; font-weight: 800; color: var(--sky); margin: 12px 0 4px; }
+.price-note { color: var(--muted); font-size: 0.8rem; margin-bottom: 24px; }
+body.light .price-card .price-note { color: #475569; }
+
+.price-list { list-style: none; text-align: left; margin-bottom: 28px; }
+.price-list li {
+  color: var(--muted); font-size: 0.88rem; padding: 8px 0;
+  border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px;
+}
+.price-list li:last-child { border-bottom: none; }
+.price-list li span { color: var(--sky); font-size: 1rem; }
+body.light .price-list li { color: #475569; }
+
+
+.price-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.pricing-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }

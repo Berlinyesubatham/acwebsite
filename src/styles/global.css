@@ -1,0 +1,147 @@
+/* ════════════════════════════════════════
+   global.css  —  Variables, Reset, Body, Scrollbar
+   Import this in: src/main.jsx  (top level once)
+   ════════════════════════════════════════ */
+
+/* ── CSS VARIABLES (Dark Theme Default) ── */
+:root {
+  --navy: #0a1628;
+  --blue: #1a4fd8;
+  --sky: #38bdf8;
+  --amber: #f59e0b;
+  --white: #f8fafc;
+  --muted: #94a3b8;
+  --card-bg: #111c32;
+  --border: rgba(56,189,248,0.15);
+  --glow: 0 0 40px rgba(26,79,216,0.3);
+  
+}
+
+/* ── LIGHT THEME OVERRIDES ── */
+body.light {
+  --navy: #f0f6ff;
+  --white: #0f172a;
+  --muted: #475569;
+  --card-bg: #ffffff;
+  --border: rgba(26,79,216,0.15);
+  --glow: 0 0 40px rgba(26,79,216,0.15);
+    --blue: #1a4fd8;
+  --sky: #0284c7; 
+  background: #f0f6ff;
+  color: #0f172a;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── BASE BODY ── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+body.light ::-webkit-scrollbar-track { background: #f0f6ff; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.fade-up  { animation: fadeUp 0.7s ease both; }
+.delay-1  { animation-delay: 0.1s; }
+.delay-2  { animation-delay: 0.2s; }
+.delay-3  { animation-delay: 0.3s; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── SHARED BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--sky));
+  color: var(--white); text-decoration: none;
+  padding: 14px 28px; border-radius: 10px;
+  font-weight: 600; font-size: 1rem;
+  border: none; cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(26,79,216,0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,79,216,0.6); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white); text-decoration: none;
+  padding: 14px 28px; border-radius: 10px; font-weight: 600; font-size: 1rem;
+  border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.4); }
+body.light .btn-outline { color: #0f172a; border-color: rgba(0,0,0,0.2); }
+body.light .btn-outline:hover { background: rgba(0,0,0,0.05); }
+
+/* ── SHARED SECTION LAYOUT ── */
+.section { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-tag {
+  display: inline-block; color: var(--sky); font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px;
+}
+.section-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+body.light .section-subtitle { color: #475569; }
+
+/* ── SHARED TAG BADGE ── */
+.tag {
+  background: rgba(26,79,216,0.15); border: 1px solid rgba(56,189,248,0.2);
+  color: var(--sky); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+}
+.tag:hover { background: rgba(26,79,216,0.3); border-color: var(--sky); color: var(--sky); }
+body.light .tag { background: rgba(26,79,216,0.08); border-color: rgba(26,79,216,0.15); color: #0f172a; }
+body.light .tag:hover { background: rgba(26,79,216,0.18); color: var(--blue); }
+
+body.light .hero h1 { color: #0f172a; }
+body.light .hero p   { color: #475569; }
+
+body.light .section-title  { color: #0f172a; }
+body.light .section-tag    { color: #1a4fd8; }
+
+body.light .stat-num { 
+  background: linear-gradient(90deg, #1a4fd8, #0284c7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.light .tag { 
+  background: rgba(26,79,216,0.1); 
+  color: #1a4fd8; 
+  border-color: rgba(26,79,216,0.25); 
+}
+
+body.light .c-value a { color: #0f172a; }
+body.light .c-value a:hover { color: #1a4fd8; }
+
+body.light .hours-time { color: #0f172a; }
+
+body.light .tech-role { color: #1a4fd8; }
+
+body.light .service-card h3,
+body.light .price-card h3,
+body.light .why-card h4,
+body.light .step h4 { color: #0f172a; }
+
+body.light .price-amount { color: #1a4fd8; }
+
+body.light .stars { color: #d97706; }
+
+body.light .footer-col h5 { color: #0f172a; }

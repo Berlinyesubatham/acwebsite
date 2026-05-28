@@ -1,0 +1,46 @@
+/* ════════════════════════════════════════
+   Contact.css
+   Import in: src/components/Contact.jsx
+   ════════════════════════════════════════ */
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 48px; align-items: start; }
+
+.contact-info h2 { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+.contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+body.light .contact-info p { color: #475569; }
+
+.contact-items { display: flex; flex-direction: column; gap: 20px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+
+.c-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(26,79,216,0.15); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+body.light .c-icon { background: rgba(26,79,216,0.08); border-color: rgba(26,79,216,0.12); }
+
+.c-label { font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.c-value { font-weight: 600; font-size: 1rem; margin-top: 2px; }
+.c-value a { color: var(--white); text-decoration: none; }
+.c-value a:hover { color: var(--sky); }
+
+/* Hours card */
+.hours-grid { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.hours-grid h4 { font-family: 'Sora', sans-serif; font-weight: 700; margin-bottom: 20px; }
+body.light .hours-grid { background: #ffffff; border-color: rgba(26,79,216,0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+.hours-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+}
+.hours-row:last-child { border-bottom: none; }
+body.light .hours-row { border-color: rgba(26,79,216,0.1); }
+.hours-day { color: var(--muted); }
+body.light .hours-day { color: #475569; }
+.hours-time { font-weight: 600; }
+.hours-time.open  { color: #22c55e; }
+.hours-time.closed { color: #ef4444; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
