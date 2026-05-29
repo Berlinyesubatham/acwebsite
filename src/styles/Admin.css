@@ -271,11 +271,10 @@
 }
 
 .admin-msg {
-  max-width: 160px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--muted);
+  min-width: 250px;
+  max-width: 350px;
+  white-space: normal;
+  word-break: break-word;
 }
 
 /* ── STATUS ── */
