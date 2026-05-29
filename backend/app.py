@@ -1,21 +1,21 @@
-import pymysql
-pymysql.install_as_MySQLdb()
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from datetime import datetime
 from dotenv import load_dotenv
+import pymysql
 import os
-from flask_cors import CORS
+
+pymysql.install_as_MySQLdb()
 
 load_dotenv()
 
-
 app = Flask(__name__)
+
 CORS(app)
 
-
-    
 database_url = os.getenv("DATABASE_URL").strip()
+
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
