@@ -26,7 +26,8 @@ def handle_options():
         response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS')
         return response, 200
     
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+database_url = os.getenv("DATABASE_URL").strip()
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
