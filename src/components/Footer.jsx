@@ -1,5 +1,5 @@
 import "../styles/Footer.css";
-
+import { FaWhatsapp } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer>
@@ -18,7 +18,9 @@ export default function Footer() {
           <div className="footer-social">
             <a href="#" className="social-btn" aria-label="Facebook">📘</a>
             <a href="#" className="social-btn" aria-label="Instagram">📸</a>
-            <a href="https://wa.me/919629535900" className="social-btn" aria-label="WhatsApp">💬</a>
+            <a href="https://wa.me/919629535900" className="social-btn" aria-label="WhatsApp" target="_blank" rel="noreferrer">
+  <FaWhatsapp />
+</a>
             <a href="#" className="social-btn" aria-label="YouTube">▶️</a>
           </div>
         </div>
@@ -51,12 +53,31 @@ export default function Footer() {
         {/* Contact Column */}
         <div className="footer-col">
           <h5>Contact</h5>
-          <ul className="footer-links">
-            <li><a href="tel:+919629535900">📞 +91 96295 35900</a></li>
-            <li><a href="https://wa.me/919629535900">💬 WhatsApp Us</a></li>
-            <li><a href="mailto:info@cooltech.ac">✉️ tajmahalacservices@gmail.com</a></li>
-            <li><a href="#contact">📍 Tirunelveli, TN</a></li>
-          </ul>
+        <ul className="footer-links">
+  <li>
+    <a href="tel:+919629535900">📞 +91 96295 35900</a>
+  </li>
+
+  <li>
+    <a
+      href="https://wa.me/919629535900"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <FaWhatsapp /> WhatsApp Us
+    </a>
+  </li>
+
+  <li>
+    <a href="mailto:tajmahalacservices@gmail.com">
+      ✉️ tajmahalacservices@gmail.com
+    </a>
+  </li>
+
+  <li>
+    <a href="#contact">📍 Tirunelveli, TN</a>
+  </li>
+</ul>
         </div>
       </div>
 

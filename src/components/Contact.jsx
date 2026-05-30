@@ -1,4 +1,5 @@
 import "../styles/Contact.css";
+import { FaWhatsapp } from "react-icons/fa";
 
 const hours = [
   { day: "Monday – Friday", time: "10:00 AM – 7:00 PM", open: true },
@@ -29,17 +30,23 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-            <div className="contact-item">
-              <div className="c-icon">💬</div>
-              <div>
-                <div className="c-label">WhatsApp</div>
-                <div className="c-value">
-                  <a href="https://wa.me/919629535900" target="_blank" rel="noreferrer">
-                    +91 96295 35900 
-                  </a>
-                </div>
-              </div>
-            </div>
+         <div className="contact-item">
+  <div className="c-icon">
+    <FaWhatsapp />
+  </div>
+  <div>
+    <div className="c-label">WhatsApp</div>
+    <div className="c-value">
+      <a
+        href="https://wa.me/919629535900"
+        target="_blank"
+        rel="noreferrer"
+      >
+        +91 96295 35900
+      </a>
+    </div>
+  </div>
+</div>
             <div className="contact-item">
               <div className="c-icon">✉️</div>
               <div>

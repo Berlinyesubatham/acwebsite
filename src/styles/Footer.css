@@ -67,3 +67,8 @@ body.light .footer-bottom p { color: #475569; }
   color: inherit;
   white-space: nowrap;
 }
+.footer-links li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
