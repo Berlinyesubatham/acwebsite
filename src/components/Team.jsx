@@ -1,17 +1,17 @@
 import "../styles/Team.css";
 const team = [
   {
-    image: "/client image.png",
+    image: "/tech1.png",
     name: "I. Satham Ussain",
     role: "Senior AC Technician",
     exp: "10+ years experience · Certified in R32 & R410A refrigerants",
     badges: ["Split AC", "VRF", "Inverter"],
   },
   {
-    image: "/images/ussain.jpg",
-    name: "Murugan S",
+    image: "/tech2.png",
+    name: "Mohamed Amjath",
     role: "Installation Specialist",
-    exp: "8+ years experience · Expert in commercial HVAC systems",
+    exp: "2+ years experience · Expert in commercial HVAC systems",
     badges: ["Commercial", "Cassette", "Duct AC"],
   },
 
