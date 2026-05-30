@@ -28,9 +28,22 @@ export default function Hero() {
       </div>
 
       <div className="hero-quote">
-        <br></br>
-        <p> "Cool as the mountain air, reliable as the rising sun."</p>
-      </div>
+  <p style={{
+    fontSize: "22px",
+    lineHeight: "1.7",
+    fontStyle: "italic",
+    color: "#ffffff",
+    textShadow: "0 2px 8px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.8)",
+    background: "rgba(0,0,0,0.35)",
+    backdropFilter: "blur(6px)",
+    padding: "16px 20px",
+    borderRadius: "14px",
+    borderLeft: "4px solid #1e90ff",
+    maxWidth: "320px"
+  }}>
+    "Cool as the mountain air, reliable as the rising sun."
+  </p>
+</div>
     </section>
   );
 }

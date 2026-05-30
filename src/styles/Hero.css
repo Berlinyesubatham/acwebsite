@@ -162,23 +162,7 @@
   color: #000;
 }
 
-/* Quote */
-.hero-quote{
-  position: relative;
-  z-index: 5;
 
-  max-width: 320px;
-
-  font-size: 22px;
-  line-height: 1.7;
-
-  font-style: italic;
-
-  color: white;
-
- 
-  
-}
 
 /* Animation */
 .fade-up {
@@ -261,6 +245,7 @@
   .btn-outline {
     width: 100%;
     text-align: center;
+    color: aqua;
   }
 }
 /* ── LIGHT MODE HERO FIX ── */
@@ -271,13 +256,6 @@ body.light .hero {
   background: #000 !important;
   color: #fff !important;
 }
-
-/* overlay same */
-body.light .hero-overlay {
-  background: rgba(0,0,0,0.42) !important;
-}
-
-/* grid same */
 body.light .hero-grid {
   background-image:
     linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),

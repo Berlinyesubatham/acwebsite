@@ -12,7 +12,7 @@ export default function Footer() {
           
           </a>
           <p>
-            Tirunelveli most trusted Tajmahal service provider since 2012.
+            Tirunelveli most trusted Tajmahal service provider since 2016.
             Certified technicians, genuine parts, and guaranteed satisfaction.
           </p>
           <div className="footer-social">
@@ -54,14 +54,14 @@ export default function Footer() {
           <ul className="footer-links">
             <li><a href="tel:+919629535900">📞 +91 96295 35900</a></li>
             <li><a href="https://wa.me/919629535900">💬 WhatsApp Us</a></li>
-            <li><a href="mailto:info@cooltech.ac">✉️ info@cooltech.ac</a></li>
+            <li><a href="mailto:info@cooltech.ac">✉️ tajmahalacservices@gmail.com</a></li>
             <li><a href="#contact">📍 Tirunelveli, TN</a></li>
           </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Tajmahal Ac Services. All rights reserved.</p>
+        <p>© 2016 Tajmahal Ac Services. All rights reserved.</p>
         <div style={{ display: "flex", gap: "20px" }}>
           <a href="#" style={{ color: "var(--muted)", textDecoration: "none", fontSize: "0.82rem" }}>Privacy Policy</a>
           <a href="#" style={{ color: "var(--muted)", textDecoration: "none", fontSize: "0.82rem" }}>Terms of Service</a>
