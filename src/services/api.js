@@ -1,7 +1,7 @@
 // src/services/api.js
 // Flask-க்கு call பண்ற function — புதுசா create பண்ணு
 
-const BASE_URL = 'https://tajmahal-acwebiste-5.onrender.com/api';
+const BASE_URL = 'https://acwebsite-2.onrender.com/api';
 
 export async function submitBooking(formData) {
   const response = await fetch(`${BASE_URL}/bookings`, {
