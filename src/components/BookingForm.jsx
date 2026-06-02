@@ -67,7 +67,7 @@ const handleSubmit = async (e) => {
             <div className="form-group">
               <label>Phone Number *</label>
               <input name="phone" value={form.phone} onChange={handleChange}
-                placeholder="+91 98765 43210" required />
+                placeholder="Enter your phone number" required />
             </div>
             <div className="form-group">
               <label>Email Address</label>
