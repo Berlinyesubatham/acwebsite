@@ -250,11 +250,18 @@ def bookings():
                 "message": booking.message
             }
             
+            
             # Send notifications to ADMIN
-            email_sent = send_email(booking_dict)
-            whatsapp_sent = send_whatsapp(booking_dict)
 
-            return jsonify({
+        print("📧 STARTING EMAIL")
+
+        email_sent = send_email(booking_dict)
+
+        print("📧 EMAIL RESULT:", email_sent)
+
+        whatsapp_sent = send_whatsapp(booking_dict)
+
+        return jsonify({
                 "success": True,
                 "message": "Booking confirmed! We'll call you soon.",
                 "bookingId": booking.id
