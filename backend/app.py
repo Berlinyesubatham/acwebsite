@@ -80,58 +80,72 @@ def send_email(booking_details):
         sender_email = os.getenv("EMAIL_USER")
         sender_password = os.getenv("EMAIL_PASSWORD")
         admin_email = os.getenv("ADMIN_EMAIL")
-        
+
         if not sender_email or not sender_password or not admin_email:
             print("⚠️ Email credentials or admin email not configured")
             return False
-        
+
         subject = f"🔔 New Booking - {booking_details['service']} (ID: {booking_details['id']})"
-        
+
         html_body = f"""
         <html>
-            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4;">
-                <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 8px;">
-                    <h2 style="color: #1a73e8;">🔔 New Booking Received!</h2>
-                    
-                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                        <p><strong>Booking ID:</strong> {booking_details['id']}</p>
-                        <p><strong>Customer Name:</strong> {booking_details['name']}</p>
-                        <p><strong>Phone:</strong> {booking_details['phone']}</p>
-                        <p><strong>Email:</strong> {booking_details['email'] or 'Not provided'}</p>
-                        <p><strong>Service:</strong> {booking_details['service']}</p>
-                        <p><strong>AC Brand:</strong> {booking_details['acBrand'] or 'Not specified'}</p>
-                        <p><strong>Date:</strong> {booking_details['date']}</p>
-                        <p><strong>Message:</strong> {booking_details['message'] or 'None'}</p>
-                    </div>
-                    
-                    <p style="color: #e74c3c; font-weight: bold;">⚠️ Action Required: Call customer to confirm appointment time.</p>
-                </div>
-            </body>
+        <body>
+
+        <h2>🔔 New Booking Received!</h2>
+
+        <p><b>Booking ID:</b> {booking_details['id']}</p>
+        <p><b>Name:</b> {booking_details['name']}</p>
+        <p><b>Phone:</b> {booking_details['phone']}</p>
+        <p><b>Email:</b> {booking_details['email']}</p>
+        <p><b>Service:</b> {booking_details['service']}</p>
+        <p><b>AC Brand:</b> {booking_details['acBrand']}</p>
+        <p><b>Date:</b> {booking_details['date']}</p>
+        <p><b>Message:</b> {booking_details['message']}</p>
+
+        </body>
         </html>
         """
-        
+
         message = MIMEMultipart("alternative")
+
         message["Subject"] = subject
         message["From"] = sender_email
         message["To"] = admin_email
-        
-        message.attach(MIMEText(html_body, "html"))
-        
-        with smtplib.SMTP_SSL(
-    "smtp.gmail.com",
-    465,
-    timeout=10
-) as server:
-            server.login(sender_email, sender_password)
-            server.sendmail(sender_email, admin_email, message.as_string())
-        
+
+        message.attach(
+            MIMEText(html_body, "html")
+        )
+
+
+        # Gmail SMTP
+        with smtplib.SMTP(
+            "smtp.gmail.com",
+            587,
+            timeout=20
+        ) as server:
+
+            server.starttls()
+
+            server.login(
+                sender_email,
+                sender_password
+            )
+
+            server.sendmail(
+                sender_email,
+                admin_email,
+                message.as_string()
+            )
+
+
         print(f"✅ Admin email sent to {admin_email}")
+
         return True
-    
+
+
     except Exception as e:
         print(f"❌ Email error: {e}")
         return False
-
 
 def send_whatsapp(booking_details):
     """Send booking notification WhatsApp to ADMIN"""
