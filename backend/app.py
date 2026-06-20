@@ -18,8 +18,14 @@ load_dotenv()
 # Flask app
 app = Flask(__name__)
 
-# Enable CORS
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://www.tajmahalacservices.in",
+            "https://acwebsite-vk5m.vercel.app"
+        ]
+    }
+})
 
 # Database URL
 database_url = os.getenv("DATABASE_URL").strip()
