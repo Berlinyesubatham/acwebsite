@@ -39,7 +39,7 @@ export default function AdminDashboard() {
 
   const fetchBookings = async () => {
     try {
-      const res  = await fetch("https://tajmahal-acwebiste-5.onrender.com/api/bookings");
+      const res  = await fetch("https://acwebsite-2.onrender.com/api/bookings");
       const data = await res.json();
       setBookings(data);
     } catch (err) {
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
 
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`https://tajmahal-acwebiste-5.onrender.com/api/bookings/${id}`, {
+      await fetch(`https://acwebsite-2.onrender.com/api/bookings/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
   const deleteBooking = async (id) => {
     if (!window.confirm("Delete this booking? This cannot be undone.")) return;
     try {
-      await fetch(`https://tajmahal-acwebiste-5.onrender.com/api/bookings/${id}`, {
+      await fetch(`https://acwebsite-2.onrender.com/api/bookings/${id}`, {
         method: "DELETE",
       });
       setBookings((prev) => prev.filter((b) => b.id !== id));

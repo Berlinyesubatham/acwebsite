@@ -8,6 +8,7 @@ export default function BookingForm() {
     name: "", phone: "", email: "", service: "", acBrand: "", date: "", message: ""
   });
   const [showPopup, setShowPopup] = useState(false);
+  const [bookingData, setBookingData] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,6 +25,7 @@ const handleSubmit = async (e) => {
 
     console.log("✅ response:", res);
 
+    setBookingData(res);
     setShowPopup(true);
 
     setForm({
@@ -46,8 +48,8 @@ const handleSubmit = async (e) => {
     <section className="book-section" id="book">
       <div className="book-inner">
 
-        {/* Popup — OK button press பண்ணா close ஆகும் */}
-        {showPopup && <BookingPopup onClose={() => setShowPopup(false)} />}
+        
+        {showPopup && <BookingPopup onClose={() => setShowPopup(false)} bookingData={bookingData} />}
 
         <div className="section-header reveal">
           <span className="section-tag">Book a Service</span>

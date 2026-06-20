@@ -7,6 +7,10 @@ from flask_cors import CORS
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import requests
 
 # Load .env variables
 load_dotenv()
@@ -61,6 +65,119 @@ with app.app_context():
         print("✅ Tables created successfully!")
     except Exception as e:
         print("❌ Error creating tables:", e)
+
+# ========== EMAIL & WHATSAPP FUNCTIONS ==========
+
+def send_email(booking_details):
+    """Send booking notification email to ADMIN"""
+    try:
+        sender_email = os.getenv("EMAIL_USER")
+        sender_password = os.getenv("EMAIL_PASSWORD")
+        admin_email = os.getenv("ADMIN_EMAIL")
+        
+        if not sender_email or not sender_password or not admin_email:
+            print("⚠️ Email credentials or admin email not configured")
+            return False
+        
+        subject = f"🔔 New Booking - {booking_details['service']} (ID: {booking_details['id']})"
+        
+        html_body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 8px;">
+                    <h2 style="color: #1a73e8;">🔔 New Booking Received!</h2>
+                    
+                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <p><strong>Booking ID:</strong> {booking_details['id']}</p>
+                        <p><strong>Customer Name:</strong> {booking_details['name']}</p>
+                        <p><strong>Phone:</strong> {booking_details['phone']}</p>
+                        <p><strong>Email:</strong> {booking_details['email'] or 'Not provided'}</p>
+                        <p><strong>Service:</strong> {booking_details['service']}</p>
+                        <p><strong>AC Brand:</strong> {booking_details['acBrand'] or 'Not specified'}</p>
+                        <p><strong>Date:</strong> {booking_details['date']}</p>
+                        <p><strong>Message:</strong> {booking_details['message'] or 'None'}</p>
+                    </div>
+                    
+                    <p style="color: #e74c3c; font-weight: bold;">⚠️ Action Required: Call customer to confirm appointment time.</p>
+                </div>
+            </body>
+        </html>
+        """
+        
+        message = MIMEMultipart("alternative")
+        message["Subject"] = subject
+        message["From"] = sender_email
+        message["To"] = admin_email
+        
+        message.attach(MIMEText(html_body, "html"))
+        
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, admin_email, message.as_string())
+        
+        print(f"✅ Admin email sent to {admin_email}")
+        return True
+    
+    except Exception as e:
+        print(f"❌ Email error: {e}")
+        return False
+
+
+def send_whatsapp(booking_details):
+    """Send booking notification WhatsApp to ADMIN"""
+    try:
+        admin_phone = os.getenv("ADMIN_WHATSAPP_NUMBER")
+        
+        if not admin_phone:
+            print("⚠️ Admin WhatsApp number not configured")
+            return False
+        
+        # Format phone number
+        if not admin_phone.startswith("+"):
+            admin_phone = "+91" + admin_phone.lstrip("0")
+        
+        message_body = f"""
+🔔 NEW BOOKING ALERT!
+
+👤 Name: {booking_details['name']}
+📞 Phone: {booking_details['phone']}
+📧 Email: {booking_details['email'] or 'Not provided'}
+🔧 Service: {booking_details['service']}
+🏢 Brand: {booking_details['acBrand'] or 'Not specified'}
+📅 Date: {booking_details['date']}
+📝 Notes: {booking_details['message'] or 'None'}
+
+📍 Booking ID: {booking_details['id']}
+
+⚡ ACTION: Call customer to confirm time slot ASAP!
+        """.strip()
+        
+        # Check if TWILIO configured
+        account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+        auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+        from_number = os.getenv("TWILIO_WHATSAPP_NUMBER")
+        
+        if all([account_sid, auth_token, from_number]):
+            url = f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Messages.json"
+            
+            data = {
+                "From": f"whatsapp:{from_number}",
+                "To": f"whatsapp:{admin_phone}",
+                "Body": message_body
+            }
+            
+            response = requests.post(url, data=data, auth=(account_sid, auth_token))
+            
+            if response.status_code == 201:
+                print(f"✅ Admin WhatsApp sent to {admin_phone}")
+                return True
+        
+        print(f"ℹ️ WhatsApp API not configured - admin must check email")
+        return False
+    
+    except Exception as e:
+        print(f"⚠️ WhatsApp error: {e}")
+        return False
 
 # Health Check Route
 @app.route('/api/health')
@@ -120,10 +237,27 @@ def bookings():
             db.session.commit()
 
             print("✅ BOOKING SAVED!")
+            
+            # Prepare booking details for notifications
+            booking_dict = {
+                "id": booking.id,
+                "name": booking.name,
+                "phone": booking.phone,
+                "email": booking.email,
+                "service": booking.service,
+                "acBrand": booking.acBrand,
+                "date": booking.date.strftime("%Y-%m-%d") if booking.date else "",
+                "message": booking.message
+            }
+            
+            # Send notifications to ADMIN
+            email_sent = send_email(booking_dict)
+            whatsapp_sent = send_whatsapp(booking_dict)
 
             return jsonify({
                 "success": True,
-                "message": "Booking received!"
+                "message": "Booking confirmed! We'll call you soon.",
+                "bookingId": booking.id
             }), 201
 
         except Exception as e:
