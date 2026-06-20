@@ -117,7 +117,11 @@ def send_email(booking_details):
         
         message.attach(MIMEText(html_body, "html"))
         
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        with smtplib.SMTP_SSL(
+    "smtp.gmail.com",
+    465,
+    timeout=10
+) as server:
             server.login(sender_email, sender_password)
             server.sendmail(sender_email, admin_email, message.as_string())
         
@@ -256,8 +260,12 @@ def bookings():
 
 
             print("📧 STARTING EMAIL")
-
-            email_sent = send_email(booking_dict)
+            try:
+                email_sent = send_email(booking_dict)
+            except Exception as e:
+                print("Email skipped:", e)
+                email_sent = False
+            
 
             print("📧 EMAIL RESULT:", email_sent)
 
