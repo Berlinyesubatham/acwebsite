@@ -188,11 +188,10 @@ def health():
 @app.route('/api/bookings', methods=['GET', 'POST', 'OPTIONS'])
 def bookings():
 
-    # Handle OPTIONS request
     if request.method == 'OPTIONS':
         return jsonify({"status": "ok"}), 200
 
-    # GET all bookings
+
     if request.method == 'GET':
         try:
             all_bookings = Booking.query.order_by(Booking.id.desc()).all()
@@ -201,27 +200,26 @@ def bookings():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    # POST new booking
+
     if request.method == 'POST':
         try:
             data = request.get_json()
 
             print("📤 DATA RECEIVED:", data)
 
-            # Validation
             if data is None:
                 return jsonify({"error": "Invalid JSON"}), 400
 
             if not data.get('name') or not data.get('phone'):
                 return jsonify({"error": "Name and Phone required"}), 400
 
-            # Convert date string to Python date
+
             date_obj = datetime.strptime(
                 data['date'],
                 '%Y-%m-%d'
             ).date()
 
-            # Create booking
+
             booking = Booking(
                 name=data['name'],
                 phone=data['phone'],
@@ -232,13 +230,13 @@ def bookings():
                 message=data.get('message', '')
             )
 
-            # Save to DB
+
             db.session.add(booking)
             db.session.commit()
 
             print("✅ BOOKING SAVED!")
-            
-            # Prepare booking details for notifications
+
+
             booking_dict = {
                 "id": booking.id,
                 "name": booking.name,
@@ -246,33 +244,30 @@ def bookings():
                 "email": booking.email,
                 "service": booking.service,
                 "acBrand": booking.acBrand,
-                "date": booking.date.strftime("%Y-%m-%d") if booking.date else "",
+                "date": booking.date.strftime("%Y-%m-%d"),
                 "message": booking.message
             }
-            
-            
-            # Send notifications to ADMIN
 
-        print("📧 STARTING EMAIL")
 
-        email_sent = send_email(booking_dict)
+            print("📧 STARTING EMAIL")
 
-        print("📧 EMAIL RESULT:", email_sent)
+            email_sent = send_email(booking_dict)
 
-        whatsapp_sent = send_whatsapp(booking_dict)
+            print("📧 EMAIL RESULT:", email_sent)
 
-        return jsonify({
+            whatsapp_sent = send_whatsapp(booking_dict)
+
+
+            return jsonify({
                 "success": True,
                 "message": "Booking confirmed! We'll call you soon.",
                 "bookingId": booking.id
             }), 201
 
+
         except Exception as e:
             print("❌ ERROR:", e)
             return jsonify({"error": str(e)}), 500
-
-
-# Update/Delete Booking
 @app.route('/api/bookings/<int:id>', methods=['PATCH', 'DELETE', 'OPTIONS'])
 def booking_detail(id):
 
