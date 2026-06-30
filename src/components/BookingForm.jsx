@@ -5,7 +5,7 @@ import BookingPopup from "./BookingPopup";
 
 export default function BookingForm() {
   const [form, setForm] = useState({
-    name: "", phone: "", email: "", service: "", acBrand: "", date: "", message: ""
+    name: "", phone: "", location: "", service: "", acBrand: "", date: "", message: ""
   });
   const [showPopup, setShowPopup] = useState(false);
   const [bookingData, setBookingData] = useState(null);
@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
     setForm({
       name: "",
       phone: "",
-      email: "",
+      location: "",
       service: "",
       acBrand: "",
       date: "",
@@ -71,11 +71,16 @@ const handleSubmit = async (e) => {
               <input name="phone" value={form.phone} onChange={handleChange}
                 placeholder="Enter your phone number" required />
             </div>
-            <div className="form-group">
-              <label>Email Address</label>
-              <input name="email" type="email" value={form.email} onChange={handleChange}
-                placeholder="you@example.com" />
-            </div>
+          <div className="form-group">
+            <label>Location</label>
+            <input
+          name="location"
+          type="text"
+          value={form.location}
+          onChange={handleChange}
+          placeholder="Enter your location"
+          />
+</div>
             <div className="form-group">
               <label>Service Type *</label>
               <select name="service" value={form.service} onChange={handleChange} required>
